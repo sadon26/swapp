@@ -101,38 +101,44 @@ const Movie = ({ movie }) => {
             <div className="movie__characters">
                 <div className="flex justify-between items-center movie__characters-header">
                     <p className="fw-600 fs-18">Characters</p>
-                    <div className="dropdown">
-                        <div
-                            tabIndex={-1}
-                            onClick={() =>
-                                setFilterActive((prevState) => !prevState)
-                            }
-                            onBlur={() => setFilterActive(false)}
-                            className="dropdown__button cursor-pointer"
-                        >
-                            <span className="text-white">{selectedFilter}</span>
-                            <div>
-                                <img src={DownArrow} alt="down-arrow" />
+                    {!loading && (
+                        <div className="dropdown">
+                            <div
+                                tabIndex={-1}
+                                onClick={() =>
+                                    setFilterActive((prevState) => !prevState)
+                                }
+                                onBlur={() => setFilterActive(false)}
+                                className="dropdown__button cursor-pointer"
+                            >
+                                <span className="text-white">
+                                    {selectedFilter}
+                                </span>
+                                <div>
+                                    <img src={DownArrow} alt="down-arrow" />
+                                </div>
+                            </div>
+                            <div
+                                className={`dropdown__options${
+                                    filterActive ? " active" : ""
+                                }`}
+                            >
+                                {["All", "Male", "Female", "Hermaphrodite"].map(
+                                    (gender, key) => (
+                                        <p
+                                            key={key}
+                                            onClick={() =>
+                                                filterByGender(gender)
+                                            }
+                                            className="dropdown__options-item"
+                                        >
+                                            {gender}
+                                        </p>
+                                    )
+                                )}
                             </div>
                         </div>
-                        <div
-                            className={`dropdown__options${
-                                filterActive ? " active" : ""
-                            }`}
-                        >
-                            {["All", "Male", "Female", "Hermaphrodite"].map(
-                                (gender, key) => (
-                                    <p
-                                        key={key}
-                                        onClick={() => filterByGender(gender)}
-                                        className="dropdown__options-item"
-                                    >
-                                        {gender}
-                                    </p>
-                                )
-                            )}
-                        </div>
-                    </div>
+                    )}
                 </div>
                 <Table
                     loading={loading}
