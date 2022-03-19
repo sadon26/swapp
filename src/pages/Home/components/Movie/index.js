@@ -30,6 +30,14 @@ const Movie = ({ movie }) => {
     };
 
     const totalCharactersHeight = () => {
+        if (filteredCharacters.length) {
+            return filteredCharacters.reduce(
+                (acc, curr) =>
+                    acc + Number(curr.height === "unknown" ? 0 : curr.height),
+                0
+            );
+        }
+
         return characters.reduce(
             (acc, curr) =>
                 acc + Number(curr.height === "unknown" ? 0 : curr.height),
