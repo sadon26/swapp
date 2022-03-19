@@ -12,7 +12,7 @@ const characterHeaders = [
         key: "edited",
     },
     {
-        text: "Height",
+        text: "Height(cm)",
         alignment: "center",
         sortable: false,
         key: "height",
