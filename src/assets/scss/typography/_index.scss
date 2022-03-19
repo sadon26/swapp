@@ -1,0 +1,25 @@
+@use "sass:math" as *;
+@import "../base/variables";
+
+@for $i from 1 through 60 {
+    .fs-#{$i} {
+        font-size: #{$i / 10}rem !important;
+    }
+}
+@for $i from 1 through 7 {
+    .fw-#{$i * 100} {
+        font-weight: $i * 100 !important;
+    }
+}
+
+.text {
+    &-white {
+        color: $white;
+    }
+    &-black {
+        color: $black;
+    }
+    &-capitalize {
+        text-transform: capitalize;
+    }
+}

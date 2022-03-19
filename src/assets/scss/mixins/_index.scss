@@ -1,0 +1,11 @@
+@mixin grid-generator($grid-columns, $columnType: col) {
+    @for $i from 1 through $grid-columns {
+        .#{$columnType}-#{$i} {
+            &.u-above {
+                position: relative;
+                z-index: 10;
+            }
+            grid-column: span $i;
+        }
+    }
+}
