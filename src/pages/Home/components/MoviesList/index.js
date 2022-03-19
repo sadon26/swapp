@@ -1,6 +1,6 @@
 import "./_index.scss";
 
-const MoviesList = ({ movies, selectedMovie, acitve }) => {
+const MoviesList = ({ movies, selectedMovie }) => {
     return (
         <div className="grid grid__layout movies__display">
             {movies.map((movie, index) => (

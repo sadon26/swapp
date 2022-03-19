@@ -5,6 +5,8 @@ import DownArrow from "../../../../assets/icons/down-arrow.svg";
 import axios from "axios";
 import "./_index.scss";
 
+const GENDERS = ["All", "Male", "Female", "Hermaphrodite", "Unknown"];
+
 const Movie = ({ movie }) => {
     const [characters, setCharacters] = useState([]);
     const [filteredCharacters, setFilteredCharacters] = useState([]);
@@ -40,12 +42,23 @@ const Movie = ({ movie }) => {
     };
 
     const sortCharacters = ({ key }) => {
-        setCharacters(() => {
-            return [...characters].sort((a, b) => {
-                if (sorting === "asc") return a[key] < b[key] ? -1 : 1;
-                return a[key] > b[key] ? -1 : 1;
+        if (filteredCharacters.length) {
+            setFilteredCharacters(() => {
+                return [...filteredCharacters].sort((a, b) => {
+                    if (sorting === "asc") return a[key] < b[key] ? -1 : 1;
+                    return a[key] > b[key] ? -1 : 1;
+                });
             });
-        });
+        }
+
+        if (!filteredCharacters.length) {
+            setCharacters(() => {
+                return [...characters].sort((a, b) => {
+                    if (sorting === "asc") return a[key] < b[key] ? -1 : 1;
+                    return a[key] > b[key] ? -1 : 1;
+                });
+            });
+        }
 
         if (sorting === "asc") {
             setSorting("desc");
@@ -63,6 +76,17 @@ const Movie = ({ movie }) => {
 
             return;
         }
+
+        if (gender === "Unknown") {
+            setFilteredCharacters(() => {
+                return [...characters].filter(
+                    (character) => character.gender.toLowerCase() === "n/a"
+                );
+            });
+
+            return;
+        }
+
         setFilteredCharacters(() => {
             return [...characters].filter(
                 (character) =>
@@ -73,6 +97,7 @@ const Movie = ({ movie }) => {
 
     useEffect(() => {
         fetchCharacters();
+        //eslint-disable-next-line
     }, [movie]);
 
     return (
@@ -123,19 +148,15 @@ const Movie = ({ movie }) => {
                                     filterActive ? " active" : ""
                                 }`}
                             >
-                                {["All", "Male", "Female", "Hermaphrodite"].map(
-                                    (gender, key) => (
-                                        <p
-                                            key={key}
-                                            onClick={() =>
-                                                filterByGender(gender)
-                                            }
-                                            className="dropdown__options-item"
-                                        >
-                                            {gender}
-                                        </p>
-                                    )
-                                )}
+                                {GENDERS.map((gender, key) => (
+                                    <p
+                                        key={key}
+                                        onClick={() => filterByGender(gender)}
+                                        className="dropdown__options-item"
+                                    >
+                                        {gender}
+                                    </p>
+                                ))}
                             </div>
                         </div>
                     )}
