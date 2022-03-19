@@ -183,7 +183,7 @@ const Movie = ({ movie }) => {
                         <>
                             <td>{row.name}</td>
                             <td className="text-capitalize">{row.gender}</td>
-                            <td>{row.height}</td>
+                            <td>{row.height}cm</td>
                         </>
                     )}
                 </Table>
