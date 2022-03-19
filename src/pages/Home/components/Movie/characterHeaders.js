@@ -1,4 +1,4 @@
-export default [
+const characterHeaders = [
     {
         text: "Name",
         alignment: "center",
@@ -18,3 +18,5 @@ export default [
         key: "height",
     },
 ];
+
+export default characterHeaders;

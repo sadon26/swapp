@@ -73,6 +73,7 @@ const Movie = ({ movie }) => {
 
     useEffect(() => {
         fetchCharacters();
+        //eslint-disable-next-line
     }, [movie]);
 
     return (

@@ -18,7 +18,7 @@ const Home = () => {
         try {
             setLoading(true);
             const response = await getData(data);
-            if (response.status === 200)
+            if (response.status === 200) {
                 setMovies(
                     response.data.results.sort((a, b) =>
                         new Date(a.release_date).getTime() <
@@ -27,6 +27,7 @@ const Home = () => {
                             : 1
                     )
                 );
+            }
         } catch (error) {
             return error;
         } finally {
@@ -51,6 +52,8 @@ const Home = () => {
 
     useEffect(() => {
         removeAnimationIntro();
+
+        //eslint-disable-next-line
     }, []);
 
     if (!showView) {
@@ -70,7 +73,6 @@ const Home = () => {
             </p>
             <section>
                 <div
-                    role="movies-opener"
                     className="flex justify-between items-center star-wars-movie__select cursor-pointer"
                     onClick={() =>
                         !loading &&
