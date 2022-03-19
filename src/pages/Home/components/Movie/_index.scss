@@ -15,9 +15,10 @@
 
     &__characters {
         margin: 20px 0 40px;
-
-        & .title {
-            margin-bottom: 10px;
+        &-header {
+            align-items: center;
+            margin-bottom: 20px;
+            z-index: 200;
         }
     }
 

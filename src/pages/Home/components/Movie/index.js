@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
-import "./_index.scss";
-import Table from "../../../../components/Table";
 import characterHeaders from "./characterHeaders";
+import Table from "../../../../components/Table";
+import DownArrow from "../../../../assets/icons/down-arrow.svg";
 import axios from "axios";
+import "./_index.scss";
 
 const Movie = ({ movie }) => {
     const [characters, setCharacters] = useState([]);
+    const [filteredCharacters, setFilteredCharacters] = useState([]);
+    const [selectedFilter, setSelectedFilter] = useState("Filter by");
     const [loading, setLoading] = useState(false);
+    const [filterActive, setFilterActive] = useState(false);
+    const [sorting, setSorting] = useState("asc");
 
     const fetchCharacters = async () => {
         try {
@@ -34,13 +39,42 @@ const Movie = ({ movie }) => {
         return Math.round(value * 0.0328084);
     };
 
+    const sortCharacters = ({ key }) => {
+        setCharacters(() => {
+            return [...characters].sort((a, b) => {
+                if (sorting === "asc") return a[key] < b[key] ? -1 : 1;
+                return a[key] > b[key] ? -1 : 1;
+            });
+        });
+
+        if (sorting === "asc") {
+            setSorting("desc");
+
+            return;
+        }
+        setSorting("asc");
+    };
+
+    const filterByGender = (gender) => {
+        setSelectedFilter(gender);
+        setFilterActive(false);
+        if (gender === "All") {
+            setFilteredCharacters([]);
+
+            return;
+        }
+        setFilteredCharacters(() => {
+            return [...characters].filter(
+                (character) =>
+                    character.gender.toLowerCase() === gender.toLowerCase()
+            );
+        });
+    };
+
     useEffect(() => {
         fetchCharacters();
     }, [movie]);
 
-    useEffect(() => {
-        console.log(characters);
-    }, [characters]);
     return (
         <div className="movie">
             <div className="movie__heading">
@@ -52,7 +86,7 @@ const Movie = ({ movie }) => {
                 </p>
             </div>
             <p className="fw-600 fs-30">{movie.title}</p>
-            <p class="mb-2">{movie.opening_crawl}</p>
+            <p className="mb-2">{movie.opening_crawl}</p>
 
             <p>
                 <i className="fs-12 fw-400 text-white">
@@ -65,11 +99,50 @@ const Movie = ({ movie }) => {
             </p>
 
             <div className="movie__characters">
-                <p className="fw-600 fs-18 title">Characters</p>
+                <div className="flex justify-between items-center movie__characters-header">
+                    <p className="fw-600 fs-18">Characters</p>
+                    <div className="dropdown">
+                        <div
+                            tabIndex={-1}
+                            onClick={() =>
+                                setFilterActive((prevState) => !prevState)
+                            }
+                            onBlur={() => setFilterActive(false)}
+                            className="dropdown__button cursor-pointer"
+                        >
+                            <span className="text-white">{selectedFilter}</span>
+                            <div>
+                                <img src={DownArrow} alt="down-arrow" />
+                            </div>
+                        </div>
+                        <div
+                            className={`dropdown__options${
+                                filterActive ? " active" : ""
+                            }`}
+                        >
+                            {["All", "Male", "Female", "Hermaphrodite"].map(
+                                (gender, key) => (
+                                    <p
+                                        key={key}
+                                        onClick={() => filterByGender(gender)}
+                                        className="dropdown__options-item"
+                                    >
+                                        {gender}
+                                    </p>
+                                )
+                            )}
+                        </div>
+                    </div>
+                </div>
                 <Table
                     loading={loading}
-                    tableData={characters}
+                    tableData={
+                        filteredCharacters.length
+                            ? filteredCharacters
+                            : characters
+                    }
                     headers={characterHeaders}
+                    sortRows={sortCharacters}
                 >
                     {(row) => (
                         <>

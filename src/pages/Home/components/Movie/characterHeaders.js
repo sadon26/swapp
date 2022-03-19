@@ -2,7 +2,7 @@ export default [
     {
         text: "Name",
         alignment: "center",
-        sortable: false,
+        sortable: true,
         key: "name",
     },
     {
