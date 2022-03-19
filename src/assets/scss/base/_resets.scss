@@ -1,0 +1,91 @@
+@font-face {
+    font-family: "Starjedi";
+    src: url("../../fonts/Starjedi.ttf");
+}
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap");
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: "Fredoka";
+}
+
+body {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #222222;
+    background: #000;
+    color: #ffb637;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+label {
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+p {
+    margin: 0;
+
+    &.fs-large {
+        font-size: 2rem;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2em;
+    margin: 0;
+    font-weight: bold;
+}

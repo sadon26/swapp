@@ -1,0 +1,67 @@
+.star-wars {
+    &__intro {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+
+        &::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: url("../../assets/images/star-wars-bg.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation: fade 5s ease-out forwards;
+        }
+    }
+    &__font {
+        font-family: "Starjedi";
+        position: absolute;
+        font-size: 130px;
+        line-height: 120px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        animation: fade-in 1.5s cubic-bezier(0.755, 0.05, 0.855, 0.06) forwards;
+
+        &.clear {
+            animation: fade-out 2s ease-out forwards;
+        }
+    }
+
+    &-movie__select {
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.093);
+        backdrop-filter: 20px;
+        color: #fff;
+        border-radius: 4px;
+        margin-bottom: 60px;
+    }
+}
+
+main {
+    padding-top: 40px;
+    animation: in 1s cubic-bezier(0.755, 0.05, 0.855, 0.06) forwards;
+}
+
+section {
+    padding: 0 120px;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 0.3;
+    }
+    80% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+    }
+}

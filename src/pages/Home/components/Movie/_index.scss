@@ -1,0 +1,29 @@
+.movie {
+    animation: fade-in-from-top 0.3s ease-out;
+
+    &__heading {
+        display: inline-block;
+        border-radius: 4px;
+        background: #ffb6371b;
+        padding: 20px;
+        margin-bottom: 15px;
+
+        & > *:nth-child(2) {
+            color: rgb(255, 100, 100);
+        }
+    }
+
+    &__characters {
+        margin: 20px 0 40px;
+        &-header {
+            align-items: center;
+            margin-bottom: 20px;
+            z-index: 200;
+        }
+    }
+
+    &__total {
+        padding: 15px 20px;
+        justify-content: flex-end;
+    }
+}
